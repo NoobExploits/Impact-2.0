@@ -68,16 +68,17 @@ local betterisfile = function(file)
 end
 local setthreadidentityfunc = syn and syn.set_thread_identity or set_thread_identity or setidentity or setthreadidentity
 local getthreadidentityfunc = syn and syn.get_thread_identity or get_thread_identity or getidentity or getthreadidentity
-if shared.VapeDeveloper then
-    if not betterisfile((rise and "rise/" or "vape/")..scripturl) then
-        error("File not found : "..(rise and "rise/" or "vape/")..scripturl)
+local function GetURL(scripturl, rise)
+    if shared.VapeDeveloper then
+        if not betterisfile((rise and "rise/" or "vape/")..scripturl) then
+            error("File not found : "..(rise and "rise/" or "vape/")..scripturl)
+        end
+        return readfile((rise and "rise/" or "vape/")..scripturl)
+    else
+        local res = game:HttpGet("https://raw.githubusercontent.com/NoobExploits/"..(rise and "Impact-2.0" or "VapeV4ForRoblox").."/main/"..scripturl, true)
+        assert(res ~= "404: Not Found", "File not found")
+        return res
     end
-    return readfile((rise and "rise/" or "vape/")..scripturl)
-else
-    local url = rise and "https://raw.githubusercontent.com/NoobExploits/Impact-2.0/main/"..scripturl or "https://raw.githubusercontent.com/7GrandDadPGN/VapeV4ForRoblox/main/"..scripturl
-    local res = game:HttpGet(url, true)
-    assert(res ~= "404: Not Found", "File not found")
-    return res
 end
 local VapeGui
 local universalcolor = Color3.new(1, 1, 1)
