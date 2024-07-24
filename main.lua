@@ -68,17 +68,20 @@ local betterisfile = function(file)
 end
 local setthreadidentityfunc = syn and syn.set_thread_identity or set_thread_identity or setidentity or setthreadidentity
 local getthreadidentityfunc = syn and syn.get_thread_identity or get_thread_identity or getidentity or getthreadidentity
-local function GetURL(scripturl, rise)
-	if shared.VapeDeveloper then
-	    if not betterisfile((rise and "rise/" or "vape/")..scripturl) then
-	        error("File not found : "..(rise and "rise/" or "vape/")..scripturl)
-	    end
-	    return readfile((rise and "rise/" or "vape/")..scripturl)
-	else
-	    local res = game:HttpGet("https://raw.githubusercontent.com/7GrandDadPGN/"..(rise and "NoobExploits/Impact-2.0" or "VapeV4ForRoblox").."/main/"..scripturl, true)
-	    assert(res ~= "404: Not Found", "File not found")
-	    return res
-	end
+if shared.VapeDeveloper then
+    if not betterisfile((rise and "rise/" or "vape/")..scripturl) then
+        error("File not found : "..(rise and "rise/" or "vape/")..scripturl)
+    end
+    return readfile((rise and "rise/" or "vape/")..scripturl)
+else
+    local res1 = game:HttpGet("https://raw.githubusercontent.com/7GrandDadPGN/"..(rise and "RiseForRoblox" or "VapeV4ForRoblox").."/main/"..scripturl, true)
+    if res1 == "404: Not Found" then
+        local res2 = game:HttpGet("https://raw.githubusercontent.com/NoobExploits/Impact-2.0/main/"..scripturl, true)
+        assert(res2 ~= "404: Not Found", "File not found")
+        return res2
+    else
+        return res1
+    end
 end
 local VapeGui
 local universalcolor = Color3.new(1, 1, 1)
