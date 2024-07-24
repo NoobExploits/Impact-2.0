@@ -69,16 +69,16 @@ end
 local setthreadidentityfunc = syn and syn.set_thread_identity or set_thread_identity or setidentity or setthreadidentity
 local getthreadidentityfunc = syn and syn.get_thread_identity or get_thread_identity or getidentity or getthreadidentity
 local function GetURL(scripturl, rise)
-    if shared.VapeDeveloper then
-        if not betterisfile((rise and "rise/" or "vape/")..scripturl) then
-            error("File not found : "..(rise and "rise/" or "vape/")..scripturl)
-        end
-        return readfile((rise and "rise/" or "vape/")..scripturl)
-    else
-        local res = game:HttpGet("https://raw.githubusercontent.com/7GrandDadPGN/"..(rise and "RiseForRoblox" or "VapeV4ForRoblox").."/main/"..scripturl, true)
-        assert(res ~= "404: Not Found", "File not found")
-        return res
-    end
+	if shared.VapeDeveloper then
+	    if not betterisfile((rise and "rise/" or "vape/")..scripturl) then
+	        error("File not found : "..(rise and "rise/" or "vape/")..scripturl)
+	    end
+	    return readfile((rise and "rise/" or "vape/")..scripturl)
+	else
+	    local res = game:HttpGet("https://raw.githubusercontent.com/7GrandDadPGN/"..(rise and "NoobExploits/Impact-2.0" or "VapeV4ForRoblox").."/main/"..scripturl, true)
+	    assert(res ~= "404: Not Found", "File not found")
+	    return res
+	end
 end
 local VapeGui
 local universalcolor = Color3.new(1, 1, 1)
@@ -248,7 +248,7 @@ local function getcustomassetfunc(path)
             textlabel:Remove()
         end)
         local req = requestfunc({
-            Url = "https://raw.githubusercontent.com/7GrandDadPGN/RiseForRoblox/main/"..path:gsub("rise/assets", "assets"),
+            Url = "https://raw.githubusercontent.com/NoobExploits/Impact-2.0/main/"..path:gsub("rise/assets", "assets"),
             Method = "GET"
         })
         writefile(path, req.Body)
@@ -261,7 +261,7 @@ end
 
 local teleportfunc = game:GetService("Players").LocalPlayer.OnTeleport:Connect(function(State)
     if State == Enum.TeleportState.Started then
-		local teleportstr = 'shared.VapeSwitchServers = true if shared.VapeDeveloper then loadstring(readfile("rise/main.lua"))() else loadstring(game:HttpGet("https://raw.githubusercontent.com/7GrandDadPGN/RiseForRoblox/main/main.lua", true))() end'
+		local teleportstr = 'shared.VapeSwitchServers = true if shared.VapeDeveloper then loadstring(readfile("rise/main.lua"))() else loadstring(game:HttpGet("https://raw.githubusercontent.com/NoobExploits/Impact-2.0/main/main.lua", true))() end'
 		if shared.VapeDeveloper then
 			teleportstr = 'shared.VapeDeveloper = true '..teleportstr
 		end
