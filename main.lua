@@ -74,14 +74,10 @@ if shared.VapeDeveloper then
     end
     return readfile((rise and "rise/" or "vape/")..scripturl)
 else
-    local res1 = game:HttpGet("https://raw.githubusercontent.com/7GrandDadPGN/"..(rise and "RiseForRoblox" or "VapeV4ForRoblox").."/main/"..scripturl, true)
-    if res1 == "404: Not Found" then
-        local res2 = game:HttpGet("https://raw.githubusercontent.com/NoobExploits/Impact-2.0/main/"..scripturl, true)
-        assert(res2 ~= "404: Not Found", "File not found")
-        return res2
-    else
-        return res1
-    end
+    local url = rise and "https://raw.githubusercontent.com/NoobExploits/Impact-2.0/main/"..scripturl or "https://raw.githubusercontent.com/7GrandDadPGN/VapeV4ForRoblox/main/"..scripturl
+    local res = game:HttpGet(url, true)
+    assert(res ~= "404: Not Found", "File not found")
+    return res
 end
 local VapeGui
 local universalcolor = Color3.new(1, 1, 1)
